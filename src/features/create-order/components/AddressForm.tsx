@@ -43,11 +43,9 @@ export const AddressForm = memo<AddressFormProps>(
 
     return (
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">{title}</h3>
-
         {/* Copy Billing to Shipping Checkbox - Only show for billing address */}
         {type === 'billing' && onCopyBillingChange && (
-          <div className="mb-4 pb-4 border-b border-gray-200">
+          <div className="mb-4">
             <label className="flex items-center">
               <input
                 type="checkbox"
@@ -61,6 +59,15 @@ export const AddressForm = memo<AddressFormProps>(
             </label>
           </div>
         )}
+
+        {/* Spacer for shipping address to match billing address alignment */}
+        {type === 'shipping' && (
+          <div className="mb-4">
+            <div className="h-6"></div>
+          </div>
+        )}
+
+        <h3 className="text-lg font-semibold text-gray-900 mb-4">{title}</h3>
 
         {/* PIN Code */}
         <div>
