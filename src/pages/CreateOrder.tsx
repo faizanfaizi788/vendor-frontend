@@ -88,9 +88,12 @@ export default function CreateOrder() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState<CreateOrderFormData>({
     mobileNumber: "",
+    searchMobileNumber: "",
+    whatsappNumber: "",
     firstName: "",
     lastName: "",
     email: "",
+
     shippingAddress: {
       address: "",
       city: "",
@@ -330,7 +333,30 @@ export default function CreateOrder() {
           </div>
         </div>
       </div>
-
+      {/* Search Mobile Number */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Search Mobile Number *
+        </label>
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
+          <input
+            type="tel"
+            value={formData.searchMobileNumber}
+            onChange={(e) =>
+              handleInputChange("searchMobileNumber", e.target.value)
+            }
+            className={`w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.searchMobileNumber ? "border-red-300" : "border-gray-300"
+              }`}
+            placeholder="Enter mobile number"
+          />
+        </div>
+        {errors.searchMobileNumber && (
+          <p className="mt-1 text-sm text-red-600">
+            {errors.searchMobileNumber}
+          </p>
+        )}
+      </div>
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Customer Details */}
         <Card>
@@ -338,33 +364,10 @@ export default function CreateOrder() {
             <h3 className="text-lg font-semibold text-gray-900 mb-4">
               Customer Details
             </h3>
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Search Mobile Number *
-                </label>
-                <div className="relative">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
-                  <input
-                    type="tel"
-                    value={formData.mobileNumber}
-                    onChange={(e) =>
-                      handleInputChange("mobileNumber", e.target.value)
-                    }
-                    className={`w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                      errors.mobileNumber ? "border-red-300" : "border-gray-300"
-                    }`}
-                    placeholder="Enter mobile number"
-                  />
-                </div>
-                {errors.mobileNumber && (
-                  <p className="mt-1 text-sm text-red-600">
-                    {errors.mobileNumber}
-                  </p>
-                )}
-              </div>
 
+            <div className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {/* First Name */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     First Name *
@@ -372,21 +375,17 @@ export default function CreateOrder() {
                   <input
                     type="text"
                     value={formData.firstName}
-                    onChange={(e) =>
-                      handleInputChange("firstName", e.target.value)
-                    }
-                    className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                      errors.firstName ? "border-red-300" : "border-gray-300"
-                    }`}
+                    onChange={(e) => handleInputChange("firstName", e.target.value)}
+                    className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.firstName ? "border-red-300" : "border-gray-300"
+                      }`}
                     placeholder="Enter first name"
                   />
                   {errors.firstName && (
-                    <p className="mt-1 text-sm text-red-600">
-                      {errors.firstName}
-                    </p>
+                    <p className="mt-1 text-sm text-red-600">{errors.firstName}</p>
                   )}
                 </div>
 
+                {/* Last Name */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Last Name *
@@ -394,21 +393,39 @@ export default function CreateOrder() {
                   <input
                     type="text"
                     value={formData.lastName}
-                    onChange={(e) =>
-                      handleInputChange("lastName", e.target.value)
-                    }
-                    className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                      errors.lastName ? "border-red-300" : "border-gray-300"
-                    }`}
+                    onChange={(e) => handleInputChange("lastName", e.target.value)}
+                    className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.lastName ? "border-red-300" : "border-gray-300"
+                      }`}
                     placeholder="Enter last name"
                   />
                   {errors.lastName && (
+                    <p className="mt-1 text-sm text-red-600">{errors.lastName}</p>
+                  )}
+                </div>
+
+                {/* WhatsApp Number */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    WhatsApp Number *
+                  </label>
+                  <input
+                    type="tel"
+                    value={formData.whatsappNumber}
+                    onChange={(e) =>
+                      handleInputChange("whatsappNumber", e.target.value)
+                    }
+                    className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.whatsappNumber ? "border-red-300" : "border-gray-300"
+                      }`}
+                    placeholder="Enter WhatsApp number"
+                  />
+                  {errors.whatsappNumber && (
                     <p className="mt-1 text-sm text-red-600">
-                      {errors.lastName}
+                      {errors.whatsappNumber}
                     </p>
                   )}
                 </div>
 
+                {/* Email */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Email *
@@ -417,13 +434,30 @@ export default function CreateOrder() {
                     type="email"
                     value={formData.email}
                     onChange={(e) => handleInputChange("email", e.target.value)}
-                    className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                      errors.email ? "border-red-300" : "border-gray-300"
-                    }`}
+                    className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.email ? "border-red-300" : "border-gray-300"
+                      }`}
                     placeholder="Enter email"
                   />
                   {errors.email && (
                     <p className="mt-1 text-sm text-red-600">{errors.email}</p>
+                  )}
+                </div>
+
+                {/* Mobile Number */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Mobile Number *
+                  </label>
+                  <input
+                    type="tel"
+                    value={formData.mobileNumber}
+                    onChange={(e) => handleInputChange("mobileNumber", e.target.value)}
+                    className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.mobileNumber ? "border-red-300" : "border-gray-300"
+                      }`}
+                    placeholder="Enter mobile number"
+                  />
+                  {errors.mobileNumber && (
+                    <p className="mt-1 text-sm text-red-600">{errors.mobileNumber}</p>
                   )}
                 </div>
               </div>
@@ -495,11 +529,10 @@ export default function CreateOrder() {
                     onChange={(e) =>
                       handleAddressChange("shipping", "address", e.target.value)
                     }
-                    className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                      errors.shippingAddress?.address
-                        ? "border-red-300"
-                        : "border-gray-300"
-                    }`}
+                    className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.shippingAddress?.address
+                      ? "border-red-300"
+                      : "border-gray-300"
+                      }`}
                     rows={3}
                     placeholder="Enter shipping address"
                   />

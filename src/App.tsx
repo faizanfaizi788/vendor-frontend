@@ -31,6 +31,7 @@ import AddEditProductPage from "./pages/AddEditProductPage"; // Import AddEditPr
 // import ProductViewPage from "./pages/ProductViewPage"; // Import ProductViewPage
 import { Toaster } from "react-hot-toast";
 import ShippingSetup from "./pages/ShippingSetup";
+import CreateOrder from "./pages/CreateOrder";
 
 export default function App() {
   return (
@@ -77,6 +78,7 @@ export default function App() {
                 <Route path="products" element={<Products />} />
                 <Route path="products/new" element={<AddEditProductPage />} />
                 <Route path="orders" element={<Orders />} />
+                <Route path="create-order" element={<CreateOrder />} />
                 <Route path="payments" element={<Payments />} />
                 <Route path="profile" element={<Profile />} />
                 <Route path="shows" element={<LiveStream />} />

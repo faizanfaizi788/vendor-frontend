@@ -4,6 +4,8 @@ export interface CreateOrderFormData {
   firstName: string;
   lastName: string;
   email: string;
+  searchMobileNumber: string,
+  whatsappNumber: string,
   
   // Addresses
   shippingAddress: Address;
