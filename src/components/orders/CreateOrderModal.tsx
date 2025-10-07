@@ -1,21 +1,21 @@
-import { useState, useEffect } from "react";
-import { Search, Plus, Minus, Trash2, Copy, Check } from "lucide-react";
-import Modal from "../ui/Modal";
-import Button from "../ui/Button";
+import { useState, useEffect } from 'react';
+import { Search, Plus, Minus, Trash2, Copy, Check } from 'lucide-react';
+import Modal from '../ui/Modal';
+import Button from '../ui/Button';
 import {
   CreateOrderModalProps,
   CreateOrderFormData,
   Address,
   OrderProduct,
-} from "./types";
+} from './types';
 
 // Mock products for search
 const mockProducts = [
-  { id: "1", code: "PROD001", name: "Wireless Headphones", price: 2999 },
-  { id: "2", code: "PROD002", name: "Smart Watch", price: 8999 },
-  { id: "3", code: "PROD003", name: "Bluetooth Speaker", price: 1999 },
-  { id: "4", code: "PROD004", name: "Phone Case", price: 499 },
-  { id: "5", code: "PROD005", name: "Laptop Stand", price: 1299 },
+  { id: '1', code: 'PROD001', name: 'Wireless Headphones', price: 2999 },
+  { id: '2', code: 'PROD002', name: 'Smart Watch', price: 8999 },
+  { id: '3', code: 'PROD003', name: 'Bluetooth Speaker', price: 1999 },
+  { id: '4', code: 'PROD004', name: 'Phone Case', price: 499 },
+  { id: '5', code: 'PROD005', name: 'Laptop Stand', price: 1299 },
 ];
 
 export default function CreateOrderModal({
@@ -24,37 +24,37 @@ export default function CreateOrderModal({
   onSave,
 }: CreateOrderModalProps) {
   const [formData, setFormData] = useState<CreateOrderFormData>({
-    mobileNumber: "",
-    firstName: "",
-    lastName: "",
-    email: "",
+    mobileNumber: '',
+    firstName: '',
+    lastName: '',
+    email: '',
     shippingAddress: {
-      address: "",
-      city: "",
-      state: "",
-      country: "India",
-      pinCode: "",
-      landmark: "",
+      address: '',
+      city: '',
+      state: '',
+      country: 'India',
+      pinCode: '',
+      landmark: '',
     },
     billingAddress: {
-      address: "",
-      city: "",
-      state: "",
-      country: "India",
-      pinCode: "",
-      landmark: "",
+      address: '',
+      city: '',
+      state: '',
+      country: 'India',
+      pinCode: '',
+      landmark: '',
     },
     copyBillingToShipping: false,
     products: [],
-    couponCode: "",
+    couponCode: '',
     totalDiscount: 0,
     shippingCharges: 0,
     bankDiscount: 0,
     couponDiscount: 0,
-    paymentMode: "cod",
+    paymentMode: 'cod',
   });
 
-  const [productSearch, setProductSearch] = useState("");
+  const [productSearch, setProductSearch] = useState('');
   const [showProductSearch, setShowProductSearch] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState(mockProducts);
   const [errors, setErrors] = useState<Partial<CreateOrderFormData>>({});
@@ -63,34 +63,34 @@ export default function CreateOrderModal({
   useEffect(() => {
     if (isOpen) {
       setFormData({
-        mobileNumber: "",
-        firstName: "",
-        lastName: "",
-        email: "",
+        mobileNumber: '',
+        firstName: '',
+        lastName: '',
+        email: '',
         shippingAddress: {
-          address: "",
-          city: "",
-          state: "",
-          country: "India",
-          pinCode: "",
-          landmark: "",
+          address: '',
+          city: '',
+          state: '',
+          country: 'India',
+          pinCode: '',
+          landmark: '',
         },
         billingAddress: {
-          address: "",
-          city: "",
-          state: "",
-          country: "India",
-          pinCode: "",
-          landmark: "",
+          address: '',
+          city: '',
+          state: '',
+          country: 'India',
+          pinCode: '',
+          landmark: '',
         },
         copyBillingToShipping: false,
         products: [],
-        couponCode: "",
+        couponCode: '',
         totalDiscount: 0,
         shippingCharges: 0,
         bankDiscount: 0,
         couponDiscount: 0,
-        paymentMode: "cod",
+        paymentMode: 'cod',
       });
       setErrors({});
     }
@@ -128,7 +128,7 @@ export default function CreateOrderModal({
   };
 
   const handleAddressChange = (
-    type: "shipping" | "billing",
+    type: 'shipping' | 'billing',
     field: keyof Address,
     value: string
   ) => {
@@ -162,7 +162,7 @@ export default function CreateOrderModal({
         products: [...prev.products, newProduct],
       }));
     }
-    setProductSearch("");
+    setProductSearch('');
     setShowProductSearch(false);
   };
 
@@ -202,32 +202,32 @@ export default function CreateOrderModal({
     const newErrors: Partial<CreateOrderFormData> = {};
 
     if (!formData.mobileNumber.trim()) {
-      newErrors.mobileNumber = "Mobile number is required";
+      newErrors.mobileNumber = 'Mobile number is required';
     }
 
     if (!formData.firstName.trim()) {
-      newErrors.firstName = "First name is required";
+      newErrors.firstName = 'First name is required';
     }
 
     if (!formData.lastName.trim()) {
-      newErrors.lastName = "Last name is required";
+      newErrors.lastName = 'Last name is required';
     }
 
     if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
+      newErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Email is invalid";
+      newErrors.email = 'Email is invalid';
     }
 
     if (!formData.shippingAddress.address.trim()) {
       newErrors.shippingAddress = {
         ...newErrors.shippingAddress,
-        address: "Shipping address is required",
+        address: 'Shipping address is required',
       };
     }
 
     if (formData.products.length === 0) {
-      newErrors.products = "At least one product is required";
+      newErrors.products = 'At least one product is required';
     }
 
     setErrors(newErrors);
@@ -258,10 +258,10 @@ export default function CreateOrderModal({
                 type="tel"
                 value={formData.mobileNumber}
                 onChange={(e) =>
-                  handleInputChange("mobileNumber", e.target.value)
+                  handleInputChange('mobileNumber', e.target.value)
                 }
                 className={`w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                  errors.mobileNumber ? "border-red-300" : "border-gray-300"
+                  errors.mobileNumber ? 'border-red-300' : 'border-gray-300'
                 }`}
                 placeholder="Enter mobile number"
               />
@@ -278,9 +278,9 @@ export default function CreateOrderModal({
             <input
               type="text"
               value={formData.firstName}
-              onChange={(e) => handleInputChange("firstName", e.target.value)}
+              onChange={(e) => handleInputChange('firstName', e.target.value)}
               className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                errors.firstName ? "border-red-300" : "border-gray-300"
+                errors.firstName ? 'border-red-300' : 'border-gray-300'
               }`}
               placeholder="Enter first name"
             />
@@ -296,9 +296,9 @@ export default function CreateOrderModal({
             <input
               type="text"
               value={formData.lastName}
-              onChange={(e) => handleInputChange("lastName", e.target.value)}
+              onChange={(e) => handleInputChange('lastName', e.target.value)}
               className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                errors.lastName ? "border-red-300" : "border-gray-300"
+                errors.lastName ? 'border-red-300' : 'border-gray-300'
               }`}
               placeholder="Enter last name"
             />
@@ -314,9 +314,9 @@ export default function CreateOrderModal({
             <input
               type="email"
               value={formData.email}
-              onChange={(e) => handleInputChange("email", e.target.value)}
+              onChange={(e) => handleInputChange('email', e.target.value)}
               className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                errors.email ? "border-red-300" : "border-gray-300"
+                errors.email ? 'border-red-300' : 'border-gray-300'
               }`}
               placeholder="Enter email"
             />
@@ -341,12 +341,12 @@ export default function CreateOrderModal({
                 <textarea
                   value={formData.shippingAddress.address}
                   onChange={(e) =>
-                    handleAddressChange("shipping", "address", e.target.value)
+                    handleAddressChange('shipping', 'address', e.target.value)
                   }
                   className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                     errors.shippingAddress?.address
-                      ? "border-red-300"
-                      : "border-gray-300"
+                      ? 'border-red-300'
+                      : 'border-gray-300'
                   }`}
                   rows={3}
                   placeholder="Enter shipping address"
@@ -367,7 +367,7 @@ export default function CreateOrderModal({
                     type="text"
                     value={formData.shippingAddress.city}
                     onChange={(e) =>
-                      handleAddressChange("shipping", "city", e.target.value)
+                      handleAddressChange('shipping', 'city', e.target.value)
                     }
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="City"
@@ -381,7 +381,7 @@ export default function CreateOrderModal({
                     type="text"
                     value={formData.shippingAddress.state}
                     onChange={(e) =>
-                      handleAddressChange("shipping", "state", e.target.value)
+                      handleAddressChange('shipping', 'state', e.target.value)
                     }
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="State"
@@ -398,7 +398,7 @@ export default function CreateOrderModal({
                     type="text"
                     value={formData.shippingAddress.pinCode}
                     onChange={(e) =>
-                      handleAddressChange("shipping", "pinCode", e.target.value)
+                      handleAddressChange('shipping', 'pinCode', e.target.value)
                     }
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="PIN Code"
@@ -410,11 +410,11 @@ export default function CreateOrderModal({
                   </label>
                   <input
                     type="text"
-                    value={formData.shippingAddress.landmark || ""}
+                    value={formData.shippingAddress.landmark || ''}
                     onChange={(e) =>
                       handleAddressChange(
-                        "shipping",
-                        "landmark",
+                        'shipping',
+                        'landmark',
                         e.target.value
                       )
                     }
@@ -438,7 +438,7 @@ export default function CreateOrderModal({
                   id="copyBilling"
                   checked={formData.copyBillingToShipping}
                   onChange={(e) =>
-                    handleInputChange("copyBillingToShipping", e.target.checked)
+                    handleInputChange('copyBillingToShipping', e.target.checked)
                   }
                   className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                 />
@@ -457,7 +457,7 @@ export default function CreateOrderModal({
                 <textarea
                   value={formData.billingAddress.address}
                   onChange={(e) =>
-                    handleAddressChange("billing", "address", e.target.value)
+                    handleAddressChange('billing', 'address', e.target.value)
                   }
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   rows={3}
@@ -475,7 +475,7 @@ export default function CreateOrderModal({
                     type="text"
                     value={formData.billingAddress.city}
                     onChange={(e) =>
-                      handleAddressChange("billing", "city", e.target.value)
+                      handleAddressChange('billing', 'city', e.target.value)
                     }
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="City"
@@ -490,7 +490,7 @@ export default function CreateOrderModal({
                     type="text"
                     value={formData.billingAddress.state}
                     onChange={(e) =>
-                      handleAddressChange("billing", "state", e.target.value)
+                      handleAddressChange('billing', 'state', e.target.value)
                     }
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="State"
@@ -508,7 +508,7 @@ export default function CreateOrderModal({
                     type="text"
                     value={formData.billingAddress.pinCode}
                     onChange={(e) =>
-                      handleAddressChange("billing", "pinCode", e.target.value)
+                      handleAddressChange('billing', 'pinCode', e.target.value)
                     }
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="PIN Code"
@@ -521,9 +521,9 @@ export default function CreateOrderModal({
                   </label>
                   <input
                     type="text"
-                    value={formData.billingAddress.landmark || ""}
+                    value={formData.billingAddress.landmark || ''}
                     onChange={(e) =>
-                      handleAddressChange("billing", "landmark", e.target.value)
+                      handleAddressChange('billing', 'landmark', e.target.value)
                     }
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="Landmark (optional)"
@@ -655,7 +655,7 @@ export default function CreateOrderModal({
                     type="text"
                     value={formData.couponCode}
                     onChange={(e) =>
-                      handleInputChange("couponCode", e.target.value)
+                      handleInputChange('couponCode', e.target.value)
                     }
                     className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="Enter coupon code"
@@ -707,9 +707,9 @@ export default function CreateOrderModal({
                   type="radio"
                   name="paymentMode"
                   value="cod"
-                  checked={formData.paymentMode === "cod"}
+                  checked={formData.paymentMode === 'cod'}
                   onChange={(e) =>
-                    handleInputChange("paymentMode", e.target.value)
+                    handleInputChange('paymentMode', e.target.value)
                   }
                   className="text-blue-600 focus:ring-blue-500"
                 />
@@ -722,9 +722,9 @@ export default function CreateOrderModal({
                   type="radio"
                   name="paymentMode"
                   value="payment-link"
-                  checked={formData.paymentMode === "payment-link"}
+                  checked={formData.paymentMode === 'payment-link'}
                   onChange={(e) =>
-                    handleInputChange("paymentMode", e.target.value)
+                    handleInputChange('paymentMode', e.target.value)
                   }
                   className="text-blue-600 focus:ring-blue-500"
                 />
@@ -735,9 +735,9 @@ export default function CreateOrderModal({
                   type="radio"
                   name="paymentMode"
                   value="qr"
-                  checked={formData.paymentMode === "qr"}
+                  checked={formData.paymentMode === 'qr'}
                   onChange={(e) =>
-                    handleInputChange("paymentMode", e.target.value)
+                    handleInputChange('paymentMode', e.target.value)
                   }
                   className="text-blue-600 focus:ring-blue-500"
                 />
@@ -792,4 +792,3 @@ export default function CreateOrderModal({
     </Modal>
   );
 }
-
